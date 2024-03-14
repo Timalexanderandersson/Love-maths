@@ -37,17 +37,19 @@ function runGame(gameType) {
 }
 /** checks the answer agains the  first element  in the returned calculateCorrectAnswer*/
 function checkAnswer() {
-    let userAnswer = parseInt(document.getElementById('answer-box').value);
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
     
     if (isCorrect){
         alert('Hey! you got it right! :D');
     } else {
-        alert(`awww... you answer ${userAnswer}.the correct answer was ${calculatedAnswer[0]}!`);
+        alert(`awww... you answer ${userAnswer}.the correct answer was ${calculatedAnswer[0]}!`)
     }
+    
     runGame(calculatedAnswer[1]);
 }
+
 /** get the Dom operands from numbers and the calculation sign and return the corrected answer. */
 function calculateCorrectAnswer() {
 let operand1 = parseInt(document.getElementById("operan1").innerText);
