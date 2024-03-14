@@ -1,10 +1,10 @@
 // wait for the DOM to load before running the game.
 //get the button element and add eventlisteners
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
     for (let button of buttons) {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 checkAnswer();
             } else {
@@ -40,38 +40,46 @@ function checkAnswer() {
     let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
-    
-    if (isCorrect){
+
+    if (isCorrect) {
         alert('Hey! you got it right! :D');
+        incrementScore();
     } else {
         alert(`awww... you answer ${userAnswer}.the correct answer was ${calculatedAnswer[0]}!`)
+        incrementWrongAnswer();
     }
-    
+
     runGame(calculatedAnswer[1]);
 }
 
 /** get the Dom operands from numbers and the calculation sign and return the corrected answer. */
 function calculateCorrectAnswer() {
-let operand1 = parseInt(document.getElementById("operand1").innerText);
-let operand2 = parseInt(document.getElementById("operand2").innerText);
-let operator = document.getElementById('operator').innerText;
+    let operand1 = parseInt(document.getElementById("operand1").innerText);
+    let operand2 = parseInt(document.getElementById("operand2").innerText);
+    let operator = document.getElementById('operator').innerText;
 
-if(operator === "+"){
-  return [operand1 + operand2 , "addition"];
-} else {
-    alert(`Unimplemented operator ${operator}`)
-    throw `Unimplemented operator ${operator}. Aborting!`;
-}
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator ${operator}`)
+        throw `Unimplemented operator ${operator}. Aborting!`;
+    }
 
 }
+/** get current score from the DOM and increase it by 1 */
 function incrementScore() {
+    let oldScore = parseInt(document.getElementById("score").innerText);
 
+    document.getElementById("score").innerText = ++oldScore;
 }
+/**Get the current tally of the increment answer from the dom and increase it by 1 */
 function incrementWrongAnswer() {
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
 
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 function displayAdditionQuestion(operand1, operand2) {
-    
+
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
